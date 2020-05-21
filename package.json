@@ -8,6 +8,9 @@
     "client": "cd ../high-space-client && npm start",
     "start-both": "concurrently \" npm run devstart\" \" npm run client\" "
   },
+  "engines": {
+    "node": "12.16.3"
+  },
   "dependencies": {
     "async": "^3.2.0",
     "clean-css": "^4.2.3",
