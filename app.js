@@ -10,6 +10,11 @@ var app = express();
 
 var dotenv = require("dotenv");
 dotenv.config();
+
+var helmet = require("helmet");
+var compression = require("compression");
+app.use(helmet());
+app.use(compression());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -21,6 +26,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", apiRouter);
+
+app.use(express.static(path.join(__dirname, "build")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
